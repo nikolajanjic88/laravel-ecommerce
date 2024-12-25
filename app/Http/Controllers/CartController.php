@@ -20,29 +20,15 @@ class CartController extends Controller
 
         $cart = session()->get('cart');
 
-        if(!$cart)
-        {
-            $cart = [
-                    $product->id => [
-                        "title" => $product->title,
-                        "quantity" => $request->quantity,
-                        "price" => $product->price,
-                        "image" => $product->image
-                    ]
-            ];
-
-            session()->put('cart', $cart);
-
-            return redirect('/cart');
-        }
-
         if(isset($cart[$product->id])) {
 
             $cart[$product->id]['quantity'] += $request->quantity;
 
             session()->put('cart', $cart);
 
-            return redirect('/cart');
+            toastr()->closeButton()->success('Product added to cart');
+
+            return redirect()->back();
         }
 
         $cart[$product->id] = [
@@ -56,7 +42,7 @@ class CartController extends Controller
 
         toastr()->closeButton()->success('Product added to cart');
 
-        return redirect('/cart');
+        return redirect()->back();
     }
 
     public function destroy(Request $request)

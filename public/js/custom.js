@@ -27,3 +27,33 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+$(".delete").click(function(e){
+    e.preventDefault();
+    const form = $(this).parents("form");
+    Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+    if (result.isConfirmed) {
+        form.submit();
+    }
+    });
+})
+
+const card = document.getElementById('payment2')
+const cash = document.getElementById('payment1')
+const div = document.getElementById('payment-card')
+
+card.addEventListener('click', function(){
+    div.style.display = 'block'
+})
+
+cash.addEventListener('click', function(){
+    div.style.display = 'none'
+})
+

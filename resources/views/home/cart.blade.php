@@ -61,54 +61,31 @@
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <h5 class="mb-0">Order details</h5>
                                         </div>
-                                        <form action="{{ route('order') }}" class="mt-4" method="POST">
-                                            @csrf
-                                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                                                <input type="hidden" name="name" id="typeName" class="form-control form-control-lg"
-                                                        value="{{ Auth::user()->name }}"/>
-                                            </div>
-                                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                                                <input type="text" name="address" id="typeText" class="form-control form-control-lg"
-                                                        value="{{ Auth::user()->address }}"/>
-                                                <label class="form-label" for="typeText">Address</label>
-                                                @error('address')
-                                                    <div class="text-danger text-center">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                                                <input type="text" name="phone" id="phone" class="form-control form-control-lg"
-                                                            value="{{ Auth::user()->phone }}"/>
-                                                <label class="form-label" for="phone">Phone</label>
-                                                @error('phone')
-                                                    <div class="text-danger text-center">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <hr class="my-4">
+                                        <hr class="my-4">
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Subtotal</p>
+                                            <?php $subTotal = 0;
+                                                foreach (session('cart') as $id => $product)
+                                                {
+                                                    $subTotal += $product['price'] * $product['quantity'];
+                                                }
+                                            ?>
+                                            <p class="mb-2">${{ $subTotal }}</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Shipping</p>
+                                            <p class="mb-2">Free</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <p class="mb-2">Total</p>
+                                            <p class="mb-2">${{ $subTotal }}</p>
+                                        </div>
+                                        <a href="{{ route('payment.index') }}" class="btn btn-success btn-block btn-lg" style="cursor: pointer">
                                             <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Subtotal</p>
-                                                <?php $subTotal = 0;
-                                                    foreach (session('cart') as $id => $product)
-                                                    {
-                                                        $subTotal += $product['price'] * $product['quantity'];
-                                                    }
-                                                ?>
-                                                <p class="mb-2">${{ $subTotal }}</p>
+                                                <span>${{ $subTotal }}</span>
+                                                <span>Checkout<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Shipping</p>
-                                                <p class="mb-2">Free</p>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-2">Total</p>
-                                                <p class="mb-2">${{ $subTotal }}</p>
-                                            </div>
-                                            <button class="btn btn-info btn-block btn-lg">
-                                                <div class="d-flex justify-content-between">
-                                                    <span>${{ $subTotal }}</span>
-                                                    <span>Place Order<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                                </div>
-                                            </button>
-                                        </form>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

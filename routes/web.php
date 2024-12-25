@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 
 
 Route::middleware('auth')->group(function () {
@@ -33,11 +34,7 @@ Route::middleware(['auth', 'verified'])->controller(CartController::class)->pref
     Route::delete('/{cart}', 'destroy')->name('cart.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->controller(OrderController::class)->group(function(){
-    Route::post('/order', 'store')->middleware(['auth', 'verified'])->name('order');
-    Route::get('/orders', 'index')->middleware(['auth', 'verified'])->name('orders');
-});
-
+Route::get('/orders', [OrderController::class, 'index'])->middleware(['auth', 'verified'])->name('orders');
 
 Route::middleware(['auth', 'admin'])->controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('/dashboard', 'index')->name('admin.index');
@@ -55,4 +52,9 @@ Route::middleware(['auth', 'admin'])->controller(AdminController::class)->prefix
     Route::get('/product/search', 'search')->name('admin.search');
     Route::get('/orders', 'indexOrders')->name('admin.orders');
     Route::put('/orders/status/{order}', 'updateOrderStatus')->name('admin.order.status');
+});
+
+Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function(){
+    Route::get('/payment', 'index')->name('payment.index');
+    Route::post('/payment', 'store')->name('payment.store');
 });

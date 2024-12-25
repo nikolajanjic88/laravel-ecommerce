@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use \Znck\Eloquent\Traits\BelongsToThrough;
-
     protected $fillable = ['title', 'description', 'price', 'image', 'category_id'];
 
     public function category()

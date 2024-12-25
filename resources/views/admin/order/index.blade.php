@@ -4,6 +4,7 @@
     <div class="d-flex justify-content-center p-4">
         <table class="table table-bordered text-white w-100 text-center mt-5">
             <tr>
+                <th scope="col" class="bg-info font-weight-bold">Order No</th>
                 <th scope="col" class="bg-info font-weight-bold">Customer name</th>
                 <th scope="col" class="bg-info font-weight-bold">Address</th>
                 <th scope="col" class="bg-info font-weight-bold">Phone</th>
@@ -16,6 +17,7 @@
             </tr>
             @foreach ($orders as $order)
             <tr>
+                <td class="align-middle">{{ $order->orderDetail->id }}</td>
                 <td class="align-middle">{{ $order->orderDetail->user->name }}</td>
                 <td class="align-middle">{{ $order->orderDetail->address }}</td>
                 <td class="align-middle">{{ $order->orderDetail->phone }}</td>
