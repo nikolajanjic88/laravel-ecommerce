@@ -91,8 +91,10 @@
             @else
                 <h2>No Orders</h2>
             @endif
+            <div class="col-lg-8 mt-3 p-4">
+                {{$orders->links()}}
+            </div>
         </div>
     </div>
 </section>
 @endsection
-

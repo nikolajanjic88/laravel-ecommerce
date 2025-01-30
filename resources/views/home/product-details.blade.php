@@ -1,7 +1,6 @@
 @extends('home.layout.layout')
 
 @section('content')
-
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 mb-4">
@@ -31,7 +30,6 @@
             </form>
         </div>
     </div>
-    @include('home.comments')
+    @include('home.inc.comments')
 </div>
-
 @endsection

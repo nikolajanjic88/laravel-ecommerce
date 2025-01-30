@@ -11,7 +11,7 @@ class OrderController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $orders = OrderDetail::with('orders')->where('user_id', $user_id)->latest()->get();
+        $orders = OrderDetail::with('orders')->where('user_id', $user_id)->latest()->paginate(1);
 
         return view('home.orders', compact('orders'));
     }

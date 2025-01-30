@@ -44,4 +44,8 @@
             </x-primary-button>
         </div>
     </form>
+    <p class="mt-3">
+        Not registered?
+        <a href="{{ route('register') }}">Create an account</a>
+    </p>
 </x-guest-layout>

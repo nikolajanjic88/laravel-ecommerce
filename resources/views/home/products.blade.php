@@ -1,7 +1,6 @@
 @extends('home.layout.layout')
 
 @section('content')
-
 <section class="shop_section layout_padding">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,5 +49,4 @@
         </div>
     </div>
 </section>
-
 @endsection
