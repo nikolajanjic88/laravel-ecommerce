@@ -10,7 +10,7 @@
                         </h6>
                         <p><i>{{ $comment->created_at }}</i></p>
                     </div>
-                    @if ($comment->user_id === Auth::user()->id)
+                    @if ($comment->user_id === Auth::user()->id || Auth::user()->usertype === 'admin')
                     <div>
                         <form action="{{ route('product.delete-comment', $comment->id) }}" method="POST">
                             @csrf
